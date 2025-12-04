@@ -6,7 +6,7 @@ import com.mojang.brigadier.arguments.FloatArgumentType;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
-import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.command.arguments.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.FoxEntity;
@@ -36,9 +36,9 @@ public class ChorusCommand implements ModInitializer {
 		if (chance > 0) {
 			int count = 0;
 			for (Entity entity : targets) {
-				if (entity instanceof LivingEntity livingEntity) {
-					if (livingEntity.getRandom().nextFloat() <= chance) {
-						TeleportEntity(livingEntity);
+				if (entity instanceof LivingEntity) {
+					if (((LivingEntity)entity).getRandom().nextFloat() <= chance) {
+						TeleportEntity((LivingEntity)entity);
 						count++;
 					}
 				}
@@ -49,11 +49,12 @@ public class ChorusCommand implements ModInitializer {
 		return targets.size();
 	}
 	public static void TeleportEntity(LivingEntity entity) {
-		if (entity.getEntityWorld() instanceof ServerWorld world) {
+		if (entity.getEntityWorld() instanceof ServerWorld) {
+			ServerWorld world = (ServerWorld)entity.getEntityWorld();
 			double x = entity.getX(), y = entity.getY(), z = entity.getZ();
 			for (int i = 0; i < 16; ++i) {
 				double g = entity.getX() + (entity.getRandom().nextDouble() - 0.5) * 16;
-				double h = MathHelper.clamp(entity.getY() + (double)(entity.getRandom().nextInt(16) - 8), world.getBottomY(), (world.getBottomY() + world.getLogicalHeight() - 1));
+				double h = MathHelper.clamp(entity.getY() + (double)(entity.getRandom().nextInt(16) - 8), 0.0F, world.getDimensionHeight() - 1);
 				double j = entity.getZ() + (entity.getRandom().nextDouble() - 0.5) * 16;
 				if (entity.hasVehicle()) entity.stopRiding();
 				if (entity.teleport(g, h, j, true)) {
