@@ -5,8 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.minecraft.command.CommandRegistryAccess;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -17,14 +16,14 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.Collection;
 
 public class ChorusCommand implements ModInitializer {
 	@Override public void onInitialize() { CommandRegistrationCallback.EVENT.register(ChorusCommand::register); }
-	public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess access, CommandManager.RegistrationEnvironment environment) {
+	public static void register(CommandDispatcher<ServerCommandSource> dispatcher, boolean dedicated) {
 		dispatcher.register(CommandManager.literal("chorus")
 				.requires(source -> source.hasPermissionLevel(2))
 				.executes(context -> execute(context.getSource(), ImmutableList.of(context.getSource().getEntityOrThrow()), 1))
@@ -44,8 +43,8 @@ public class ChorusCommand implements ModInitializer {
 					}
 				}
 			}
-			if (targets.size() == 1) source.sendFeedback(Text.translatable("commands.chorus.success.single", targets.iterator().next().getDisplayName()), true);
-			else source.sendFeedback(Text.translatable("commands.chorus.success.multiple", count), true);
+			if (targets.size() == 1) source.sendFeedback(new TranslatableText("commands.chorus.success.single", targets.iterator().next().getDisplayName()), true);
+			else source.sendFeedback(new TranslatableText("commands.chorus.success.multiple", count), true);
 		}
 		return targets.size();
 	}
