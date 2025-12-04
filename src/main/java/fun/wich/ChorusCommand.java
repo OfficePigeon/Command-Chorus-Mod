@@ -60,7 +60,6 @@ public class ChorusCommand implements ModInitializer {
 					SoundEvent soundEvent = entity instanceof FoxEntity ? SoundEvents.ENTITY_FOX_TELEPORT : SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
 					world.playSound(null, x, y, z, soundEvent, SoundCategory.PLAYERS, 1, 1);
 					entity.playSound(soundEvent, 1, 1);
-					entity.onLanding();
 					break;
 				}
 			}
