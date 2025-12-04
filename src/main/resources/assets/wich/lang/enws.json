@@ -1,0 +1,4 @@
+{
+  "commands.chorus.success.single": "%s re-appeared",
+  "commands.chorus.success.multiple": "%s entities re-appeared"
+}

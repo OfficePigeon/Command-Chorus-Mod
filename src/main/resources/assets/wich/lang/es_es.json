@@ -1,0 +1,4 @@
+{
+  "commands.chorus.success.single": "%s se teletransportó",
+  "commands.chorus.success.multiple": "%s entidades teletransportadas"
+}

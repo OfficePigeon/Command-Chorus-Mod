@@ -1,0 +1,4 @@
+{
+  "commands.chorus.success.single": "%s was warped",
+  "commands.chorus.success.multiple": "%s entities were warped"
+}

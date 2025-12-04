@@ -1,0 +1,4 @@
+{
+  "commands.chorus.success.single": "%s телепортовано",
+  "commands.chorus.success.multiple": "%s сутностей телепортовано"
+}

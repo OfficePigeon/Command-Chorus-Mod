@@ -1,0 +1,4 @@
+{
+  "commands.chorus.success.single": "%s sailed",
+  "commands.chorus.success.multiple": "%s sailors sailed"
+}
