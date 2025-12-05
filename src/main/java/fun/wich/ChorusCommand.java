@@ -44,7 +44,7 @@ public class ChorusCommand implements ModInitializer {
 					}
 				}
 			}
-			if (targets.size() == 1) source.sendFeedback(Text.translatable("commands.chorus.success.single", targets.iterator().next().getDisplayName()), true);
+			if (targets.size() == 1 && count > 0) source.sendFeedback(Text.translatable("commands.chorus.success.single", targets.iterator().next().getDisplayName()), true);
 			else source.sendFeedback(Text.translatable("commands.chorus.success.multiple", count), true);
 		}
 		return targets.size();
