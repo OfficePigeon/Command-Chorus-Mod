@@ -26,7 +26,7 @@ public class ChorusCommand implements ModInitializer {
 	@Override public void onInitialize() { CommandRegistrationCallback.EVENT.register(ChorusCommand::register); }
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess access, CommandManager.RegistrationEnvironment environment) {
 		dispatcher.register(CommandManager.literal("chorus")
-				.requires(source -> source.hasPermissionLevel(2))
+				.requires(CommandManager.requirePermissionLevel(CommandManager.GAMEMASTERS_CHECK))
 				.executes(context -> execute(context.getSource(), ImmutableList.of(context.getSource().getEntityOrThrow()), 1))
 				.then(CommandManager.argument("targets", EntityArgumentType.entities())
 						.executes(context -> execute(context.getSource(), EntityArgumentType.getEntities(context, "targets"), 1))
